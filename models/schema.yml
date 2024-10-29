@@ -9,6 +9,12 @@ sources:
       - name: sales
         identifier: raw_gz_sales
         description: Historique de commandes de Greenwizz avec les revenus et les quantités
+        loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+        freshness: 
+          warn_after:
+            count: 90
+            period: day
+        
         tests:
           - unique:
               column_name : "(orders_id || '_' || pdt_id)"
