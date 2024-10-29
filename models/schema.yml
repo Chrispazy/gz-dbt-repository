@@ -10,18 +10,16 @@ sources:
         identifier: raw_gz_sales
         description: Historique de commandes de Greenwizz avec les revenus et les quantités
         loaded_at_field: "CAST(date_date AS TIMESTAMP)"
-        freshness: 
+        freshness:
           warn_after:
             count: 90
             period: day
         columns:
-         - name: date_date 
-           description: date of purchase
+          - name: date_date
+            description: date of purchase
         tests:
           - unique:
-              column_name : "(orders_id || '_' || pdt_id)"
-        
-            
+              column_name: "(orders_id || '_' || pdt_id)"
 
       - name: product
         identifier: raw_gz_product
@@ -32,7 +30,7 @@ sources:
             tests:
               - unique
               - not_null
-                  
+
       - name: ship
         identifier: raw_gz_ship
         description: Tables des coûts liés aux shipping
@@ -42,4 +40,36 @@ sources:
             tests:
               - unique
               - not_null
-              
+
+models:
+  - name: int_orders_margin
+    description: table intermediaire des orders margins, fait à partir de la table sales
+    columns:
+      - name: orders_id
+        tests:
+          - unique
+          - not_null
+          
+  - name: int_orders_operational
+    description: table intermediaire faite à partir des stg_raw_ship
+    columns:
+      - name: orders_id
+        tests:
+         - unique
+         - not_null
+
+  - name: int_sales_margin
+    description: table intermediaire faite à partir des stg_raw_sales et stg_raw_product
+    tests:
+      - unique:
+          column_name: "(orders_id || '_' || products_id)"
+
+  - name: finance_days
+    description: table finale présentée aux équipes BI finance
+    columns:
+      - name: date_date
+        tests:
+          - unique
+          - not_null
+          
+
