@@ -6,6 +6,8 @@ select
     ) as operational_margin,
     quantity,
     revenue,
-    purchase_cost
+    purchase_cost,
+    shipping_fee,
+    logcost
 from {{ ref("int_orders_margin") }} as m
 inner join {{ ref("stg_raw__ship") }} as ship using (orders_id)
