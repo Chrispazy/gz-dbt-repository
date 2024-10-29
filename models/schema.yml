@@ -9,12 +9,31 @@ sources:
       - name: sales
         identifier: raw_gz_sales
         description: Historique de commandes de Greenwizz avec les revenus et les quantités
+        tests:
+          - unique:
+              column_name : "(orders_id || '_' || pdt_id)"
         columns:
           - name: revenue 
             description: total revenue from the sales
+            
+
       - name: product
         identifier: raw_gz_product
         description: Identifation d'un prix fonction du product_id
+        columns:
+          - name: products_id
+            description: Primary Key
+            tests:
+              - unique
+              - not_null
+                  
       - name: ship
         identifier: raw_gz_ship
         description: Tables des coûts liés aux shipping
+        columns:
+          - name: orders_id
+            description: identifiant de commande
+            tests:
+              - unique
+              - not_null
+              
