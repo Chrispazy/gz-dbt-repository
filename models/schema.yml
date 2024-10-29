@@ -14,12 +14,14 @@ sources:
           warn_after:
             count: 90
             period: day
+        columns:
+                  - name: date_date 
+                    description: date of purchase
+
         tests:
           - unique:
               column_name : "(orders_id || '_' || pdt_id)"
-        columns:
-          - name: revenue 
-            description: total revenue from the sales
+        
             
 
       - name: product
