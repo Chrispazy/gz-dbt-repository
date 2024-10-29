@@ -17,7 +17,6 @@ sources:
         columns:
                   - name: date_date 
                     description: date of purchase
-
         tests:
           - unique:
               column_name : "(orders_id || '_' || pdt_id)"
