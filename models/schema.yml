@@ -168,4 +168,12 @@ models:
       - unique:
           column_name: "(date_date || '_' || campaign_key)"
 
+  - name: int_campaigns_day
+    description: view des aggrégations par jour des clicks / impressions / coûts des pubs
+    columns:
+      - name: date_date
+        tests:
+          - unique
+          - not_null
+
 
