@@ -9,4 +9,4 @@ FROM {{ref("stg_raw__criteo")}}
 UNION ALL
 SELECT *
 FROM {{ref("stg_raw__facebook")}}
-ORDER BY date_date, paid_source
+ORDER BY date_date DESC, paid_source
