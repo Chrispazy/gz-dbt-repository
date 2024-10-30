@@ -41,6 +41,96 @@ sources:
               - unique
               - not_null
 
+      - name: adwords
+        identifier: raw_gz_adwords
+        description: Retour de campagne Adwords, ads_cost, impressions, click
+        columns:
+          - name: date_date
+            description: date
+          - name: paid_source
+            description: site
+          - name: campaign_key
+            description: code de numéro de campagne
+          - name: campgn_name
+            description: nom codé de la campagne
+          - name: ads_cost
+            description: prix de la campagne pub
+          - name: impression
+            description: nombre d'impression
+          - name: click
+            description: nombre de click
+        tests:
+          - unique:
+              column_name: "(date_date || '_' || campaign_key)"
+
+ 
+      - name: bing
+        identifier: raw_gz_bing
+        description: Retour de campagne bing, ads_cost, impressions, click
+        columns:
+          - name: date_date
+            description: date
+          - name: paid_source
+            description: site
+          - name: campaign_key
+            description: code de numéro de campagne
+          - name: campgn_name
+            description: nom codé de la campagne
+          - name: ads_cost
+            description: prix de la campagne pub
+          - name: impression
+            description: nombre d'impression
+          - name: click
+            description: nombre de click
+        tests:
+          - unique:
+              column_name: "(date_date || '_' || campaign_key)"
+
+      - name: criteo
+        identifier: raw_gz_criteo
+        description: Retour de campagne criteo, ads_cost, impressions, click
+        columns:
+          - name: date_date
+            description: date
+          - name: paid_source
+            description: site
+          - name: campaign_key
+            description: code de numéro de campagne
+          - name: campgn_name
+            description: nom codé de la campagne
+          - name: ads_cost
+            description: prix de la campagne pub
+          - name: impression
+            description: nombre d'impression
+          - name: click
+            description: nombre de click
+        tests:
+          - unique:
+              column_name: "(date_date || '_' || campaign_key)"
+
+      - name: facebook
+        identifier: raw_gz_facebook
+        description: Retour de campagne facebook, ads_cost, impressions, click
+        columns:
+          - name: date_date
+            description: date
+          - name: paid_source
+            description: site
+          - name: campaign_key
+            description: code de numéro de campagne
+          - name: campgn_name
+            description: nom codé de la campagne
+          - name: ads_cost
+            description: prix de la campagne pub
+          - name: impression
+            description: nombre d'impression
+          - name: click
+            description: nombre de click
+        tests:
+          - unique:
+              column_name: "(date_date || '_' || campaign_key)"
+
+
 models:
   - name: int_orders_margin
     description: table intermediaire des orders margins, fait à partir de la table sales
@@ -71,5 +161,26 @@ models:
         tests:
           - unique
           - not_null
-          
+
+  - name: int_campaigns
+    description: table intermediaire faite à partir des fichiers brut de chaque marques publicitaires
+    tests:
+      - unique:
+          column_name: "(date_date || '_' || campaign_key)"
+
+  - name: int_campaigns_day
+    description: view des aggrégations par jour des clicks / impressions / coûts des pubs
+    columns:
+      - name: date_date
+        tests:
+          - unique
+          - not_null
+
+  - name: finance_campaigns_day
+    description: table de la jointure int_campaigns_day et finance_days
+    columns:
+      - name: date_date
+        tests:
+          - unique
+          - not_null
 
