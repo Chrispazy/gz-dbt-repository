@@ -12,7 +12,7 @@ SELECT
     ,tot_revenue - ads_cost AS margin
     ,tot__shipping_fee AS shipping_fee
     ,tot_log_cost AS logcost
-    ,tot__shipping_fee + (tot_revenue-ads_cost) -tot_log_cost - operational_margin AS ship_cost
+    ,ROUND(tot__shipping_fee + (tot_revenue-ads_cost) -tot_log_cost - operational_margin,2) AS ship_cost
 FROM {{ref("int_campaigns_day")}} AS c
 INNER JOIN {{ref("finance_days")}} AS f
 USING(date_date)
