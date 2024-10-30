@@ -176,4 +176,11 @@ models:
           - unique
           - not_null
 
+  - name: finance_campaigns_day
+    description: table de la jointure int_campaigns_day et finance_days
+    columns:
+      - name: date_date
+        tests:
+          - unique
+          - not_null
 
